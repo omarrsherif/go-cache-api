@@ -1,1 +1,17 @@
+# Local settings and credentials. Copy .env.example to .env instead.
 .env
+.env.*
+!.env.example
+
+# Compiled binaries and test output
+/bin/
+*.exe
+*.test
+*.out
+coverage.*
+
+# Editor and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
