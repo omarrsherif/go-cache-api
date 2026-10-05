@@ -24,7 +24,7 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 
 	// Our own config package, which reads the database settings from .env.
-	"github.com/omarrsherif/GO-PROJECT/internal/config"
+	"github.com/omarrsherif/go-cache-api/internal/config"
 )
 
 // New opens the connection to MySQL and makes sure it actually works.

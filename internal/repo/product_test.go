@@ -11,8 +11,8 @@ import (
 
 	"github.com/joho/godotenv"
 
-	"github.com/omarrsherif/GO-PROJECT/internal/config"
-	"github.com/omarrsherif/GO-PROJECT/internal/models"
+	"github.com/omarrsherif/go-cache-api/internal/config"
+	"github.com/omarrsherif/go-cache-api/internal/models"
 )
 
 // testDB opens a database connection for a test to use.

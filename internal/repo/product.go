@@ -14,7 +14,7 @@ import (
 
 	"fmt"
 
-	"github.com/omarrsherif/GO-PROJECT/internal/models"
+	"github.com/omarrsherif/go-cache-api/internal/models"
 )
 
 // ErrNotFound is our own error meaning "no product has that id".

@@ -6,8 +6,8 @@ import (
 	// "log" prints messages with a timestamp, and can stop the program.
 	"log"
 
-	"github.com/omarrsherif/GO-PROJECT/internal/config"
-	"github.com/omarrsherif/GO-PROJECT/internal/repo"
+	"github.com/omarrsherif/go-cache-api/internal/config"
+	"github.com/omarrsherif/go-cache-api/internal/repo"
 )
 
 func main() {

@@ -9,7 +9,7 @@ import "time"
 
 // Product describes ONE row of the products table.
 //
-// Each field lines up with one column in first.sql. When we read a row out
+// Each field lines up with one column in schema.sql. When we read a row out
 // of MySQL we copy each column into the matching field here, and when we
 // save a product we send these fields back to MySQL.
 //

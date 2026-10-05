@@ -1,4 +1,4 @@
-module github.com/omarrsherif/GO-PROJECT
+module github.com/omarrsherif/go-cache-api
 
 go 1.27.1
 
