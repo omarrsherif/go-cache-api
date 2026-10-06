@@ -1,0 +1,42 @@
+# Benchmark overlay: runs the load generator as a container on the same
+# network as the API, Redis and MySQL, so no request crosses the Docker
+# Desktop host proxy. Reports land in ./docs/benchmarks.
+#
+#   docker compose -f docker-compose.yml -f docker-compose.bench.yml run --rm --build loadtest
+#   docker compose -f docker-compose.yml -f docker-compose.bench.yml run --rm loadtest -quick
+#   docker compose -f docker-compose.yml -f docker-compose.bench.yml down
+#
+# MySQL is limited to 2 CPUs and Redis to 1 (Redis serves commands on one
+# thread anyway). On a 24-core workstation an unconstrained MySQL answers
+# primary-key lookups as fast as Redis; the limits model the usual production
+# shape where the database is a shared resource that does not scale with the
+# API tier. Remove the `cpus:` lines to measure without them.
+
+services:
+  mysql:
+    cpus: "2"
+
+  redis:
+    cpus: "1"
+
+  api:
+    environment:
+      CACHE_TTL: 10m        # entries must not expire mid-scenario
+      LOG_LEVEL: warn       # no per-request logging while measuring
+      DB_MAX_OPEN_CONNS: "64"
+      DB_MAX_IDLE_CONNS: "64"
+
+  loadtest:
+    build: .
+    entrypoint: ["loadtest"]
+    command: ["-products", "1000"]
+    environment:
+      LOADTEST_URL: http://api:8080
+      LOADTEST_OUT: /out
+      LOADTEST_TOPOLOGY: "all services in Docker (compose network); load generator, API, Redis and MySQL as containers"
+      LOADTEST_RESOURCES: "mysql cpus=2, redis cpus=1, api and loadtest unlimited (24 CPUs shared)"
+    volumes:
+      - ./docs/benchmarks:/out
+    depends_on:
+      api:
+        condition: service_healthy

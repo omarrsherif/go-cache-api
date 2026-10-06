@@ -1,0 +1,65 @@
+# Compose reads the project .env automatically, so DB_* and MYSQL_ROOT_PASSWORD
+# line up with what the Go app loads.
+#
+#   docker compose up -d mysql redis     # dependencies only (local dev, benchmarks)
+#   docker compose up -d --build         # everything, API on :8080 (override with API_PORT=...)
+#   docker compose down -v               # also drop MySQL data so schema.sql re-runs
+
+name: go-cache-api
+
+services:
+  mysql:
+    image: mysql:8.4
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-change-me-too}
+      MYSQL_DATABASE: ${DB_NAME:-cache_api}
+      MYSQL_USER: ${DB_USER:-app}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-change-me}
+    ports:
+      - "127.0.0.1:3307:3306"
+    volumes:
+      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql:ro
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      # -h 127.0.0.1 forces TCP so the socket-only init-phase server does not report healthy
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-p${MYSQL_ROOT_PASSWORD:-change-me-too}"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+      start_period: 30s
+
+  redis:
+    image: redis:8
+    command: ["redis-server", "--save", "", "--appendonly", "no"] # pure cache: no disk persistence
+    ports:
+      - "127.0.0.1:6380:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  api:
+    build: .
+    ports:
+      - "${API_PORT:-8080}:8080"
+    environment:
+      DB_HOST: mysql
+      DB_PORT: "3306"
+      DB_USER: ${DB_USER:-app}
+      DB_PASSWORD: ${DB_PASSWORD:-change-me}
+      DB_NAME: ${DB_NAME:-cache_api}
+      REDIS_ADDR: redis:6379
+      SERVER_PORT: "8080"
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+      CACHE_TTL: ${CACHE_TTL:-60s}
+      DB_MAX_OPEN_CONNS: ${DB_MAX_OPEN_CONNS:-25}
+      BATCH_WORKERS: ${BATCH_WORKERS:-8}
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+volumes:
+  mysql_data:
