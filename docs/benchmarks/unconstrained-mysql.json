@@ -1,0 +1,757 @@
+{
+  "generated": "2026-10-05T23:19:15.413539491Z",
+  "quick": false,
+  "environment": {
+    "os": "linux",
+    "arch": "amd64",
+    "cpus": 24,
+    "go_version": "go1.27.1",
+    "topology": "all services in Docker (compose network); load generator, API, Redis and MySQL as containers",
+    "server_config": {
+      "batch_workers": 8,
+      "cache_ttl": "10m0s",
+      "db_max_idle_conns": 64,
+      "db_max_open_conns": 64,
+      "max_batch_workers": 64,
+      "redis_op_timeout": "100ms",
+      "redis_pool_size": 100,
+      "request_timeout": "5s"
+    },
+    "products_seeded": 1000,
+    "timer_resolution": "29ns"
+  },
+  "single_key": [
+    {
+      "name": "read_cache_hit",
+      "concurrency": 50,
+      "duration": "15s",
+      "requests": 958637,
+      "rps": 63909.13333333333,
+      "latency": {
+        "count": 958637,
+        "mean_ms": 0.7798413231932421,
+        "p50_ms": 0.676931,
+        "p90_ms": 1.367922,
+        "p95_ms": 1.676953,
+        "p99_ms": 2.419551,
+        "max_ms": 5.58213
+      },
+      "little_mean_ms": 0.7823607893290162,
+      "errors": 0,
+      "timeouts_504": 0,
+      "x_cache": {
+        "HIT": 958637
+      },
+      "server_metrics_delta": {
+        "requests": 958618,
+        "cache_hits": 958646,
+        "cache_misses": 0,
+        "cache_bypass": 0,
+        "coalesced": 0,
+        "db_reads": 0,
+        "redis_errors": 0,
+        "hit_rate": 1
+      }
+    },
+    {
+      "name": "read_mysql_only",
+      "concurrency": 50,
+      "duration": "15s",
+      "requests": 900763,
+      "rps": 60050.86666666667,
+      "latency": {
+        "count": 900763,
+        "mean_ms": 0.8295007060381032,
+        "p50_ms": 0.698055,
+        "p90_ms": 1.480565,
+        "p95_ms": 1.871409,
+        "p99_ms": 2.697204,
+        "max_ms": 6.588994
+      },
+      "little_mean_ms": 0.832627450283815,
+      "errors": 0,
+      "timeouts_504": 0,
+      "x_cache": {
+        "BYPASS": 900763
+      },
+      "server_metrics_delta": {
+        "requests": 900731,
+        "cache_hits": 0,
+        "cache_misses": 0,
+        "cache_bypass": 900731,
+        "coalesced": 0,
+        "db_reads": 900731,
+        "redis_errors": 0,
+        "hit_rate": 0
+      }
+    }
+  ],
+  "mixed": {
+    "name": "mixed_zipf_90r_10w",
+    "concurrency": 50,
+    "duration": "15s",
+    "requests": 66096,
+    "rps": 4406.4,
+    "latency": {
+      "count": 66096,
+      "mean_ms": 11.24530834510409,
+      "p50_ms": 0.232631,
+      "p90_ms": 0.905483,
+      "p95_ms": 15.462802,
+      "p99_ms": 535.241048,
+      "max_ms": 645.45566
+    },
+    "by_kind": {
+      "GET": {
+        "count": 59595,
+        "mean_ms": 0.262476182448192,
+        "p50_ms": 0.2255,
+        "p90_ms": 0.435922,
+        "p95_ms": 0.507559,
+        "p99_ms": 0.67155,
+        "max_ms": 1.946706
+      },
+      "PUT": {
+        "count": 6501,
+        "mean_ms": 111.92549335256115,
+        "p50_ms": 15.556082,
+        "p90_ms": 535.915236,
+        "p95_ms": 558.832543,
+        "p99_ms": 592.725583,
+        "max_ms": 645.45566
+      }
+    },
+    "little_mean_ms": 11.347131445170662,
+    "errors": 0,
+    "timeouts_504": 0,
+    "x_cache": {
+      "HIT": 53034,
+      "MISS": 6561
+    },
+    "server_metrics_delta": {
+      "requests": 59594,
+      "cache_hits": 53033,
+      "cache_misses": 6561,
+      "cache_bypass": 0,
+      "coalesced": 476,
+      "db_reads": 6085,
+      "redis_errors": 0,
+      "hit_rate": 0.8899050239957043
+    }
+  },
+  "batch": [
+    {
+      "name": "batch_sequential",
+      "concurrency": 4,
+      "duration": "10s",
+      "requests": 7341,
+      "rps": 734.1,
+      "latency": {
+        "count": 7341,
+        "mean_ms": 5.439188517368207,
+        "p50_ms": 5.367607,
+        "p90_ms": 6.023624,
+        "p95_ms": 6.293733,
+        "p99_ms": 6.906339,
+        "max_ms": 8.175752
+      },
+      "little_mean_ms": 5.448848930663397,
+      "errors": 0,
+      "timeouts_504": 0,
+      "x_cache": {},
+      "server_metrics_delta": {
+        "requests": 366896,
+        "cache_hits": 0,
+        "cache_misses": 0,
+        "cache_bypass": 366896,
+        "coalesced": 0,
+        "db_reads": 366896,
+        "redis_errors": 0,
+        "hit_rate": 0
+      },
+      "mode": "sequential",
+      "workers": 1
+    },
+    {
+      "name": "batch_workers_1",
+      "concurrency": 4,
+      "duration": "10s",
+      "requests": 7113,
+      "rps": 711.3,
+      "latency": {
+        "count": 7113,
+        "mean_ms": 5.613906949107268,
+        "p50_ms": 5.499041,
+        "p90_ms": 6.354943,
+        "p95_ms": 6.72087,
+        "p99_ms": 7.741522,
+        "max_ms": 12.363905
+      },
+      "little_mean_ms": 5.62350625615071,
+      "errors": 0,
+      "timeouts_504": 0,
+      "x_cache": {},
+      "server_metrics_delta": {
+        "requests": 355455,
+        "cache_hits": 0,
+        "cache_misses": 0,
+        "cache_bypass": 355455,
+        "coalesced": 0,
+        "db_reads": 355455,
+        "redis_errors": 0,
+        "hit_rate": 0
+      },
+      "mode": "concurrent",
+      "workers": 1
+    },
+    {
+      "name": "batch_workers_4",
+      "concurrency": 4,
+      "duration": "10s",
+      "requests": 11920,
+      "rps": 1192,
+      "latency": {
+        "count": 11920,
+        "mean_ms": 3.341230111409396,
+        "p50_ms": 3.265337,
+        "p90_ms": 3.967341,
+        "p95_ms": 4.199167,
+        "p99_ms": 4.740423,
+        "max_ms": 7.329068
+      },
+      "little_mean_ms": 3.3557046979865772,
+      "errors": 0,
+      "timeouts_504": 0,
+      "x_cache": {},
+      "server_metrics_delta": {
+        "requests": 595828,
+        "cache_hits": 0,
+        "cache_misses": 0,
+        "cache_bypass": 595828,
+        "coalesced": 0,
+        "db_reads": 595828,
+        "redis_errors": 0,
+        "hit_rate": 0
+      },
+      "mode": "concurrent",
+      "workers": 4
+    },
+    {
+      "name": "batch_workers_8",
+      "concurrency": 4,
+      "duration": "10s",
+      "requests": 16732,
+      "rps": 1673.2,
+      "latency": {
+        "count": 16732,
+        "mean_ms": 2.3741717868156824,
+        "p50_ms": 2.239625,
+        "p90_ms": 3.153262,
+        "p95_ms": 3.473022,
+        "p99_ms": 4.061526,
+        "max_ms": 6.459759
+      },
+      "little_mean_ms": 2.390628735357399,
+      "errors": 0,
+      "timeouts_504": 0,
+      "x_cache": {},
+      "server_metrics_delta": {
+        "requests": 836400,
+        "cache_hits": 0,
+        "cache_misses": 0,
+        "cache_bypass": 836400,
+        "coalesced": 0,
+        "db_reads": 836400,
+        "redis_errors": 0,
+        "hit_rate": 0
+      },
+      "mode": "concurrent",
+      "workers": 8
+    },
+    {
+      "name": "batch_workers_16",
+      "concurrency": 4,
+      "duration": "10s",
+      "requests": 20448,
+      "rps": 2044.8,
+      "latency": {
+        "count": 20448,
+        "mean_ms": 1.9390964377934272,
+        "p50_ms": 1.765787,
+        "p90_ms": 2.834633,
+        "p95_ms": 3.21252,
+        "p99_ms": 3.805008,
+        "max_ms": 7.537852
+      },
+      "little_mean_ms": 1.9561815336463224,
+      "errors": 0,
+      "timeouts_504": 0,
+      "x_cache": {},
+      "server_metrics_delta": {
+        "requests": 1022200,
+        "cache_hits": 0,
+        "cache_misses": 0,
+        "cache_bypass": 1022200,
+        "coalesced": 0,
+        "db_reads": 1022200,
+        "redis_errors": 0,
+        "hit_rate": 0
+      },
+      "mode": "concurrent",
+      "workers": 16
+    },
+    {
+      "name": "batch_workers_32",
+      "concurrency": 4,
+      "duration": "10s",
+      "requests": 18749,
+      "rps": 1874.9,
+      "latency": {
+        "count": 18749,
+        "mean_ms": 2.1141663371913166,
+        "p50_ms": 1.932224,
+        "p90_ms": 3.115825,
+        "p95_ms": 3.522984,
+        "p99_ms": 4.233313,
+        "max_ms": 7.334599
+      },
+      "little_mean_ms": 2.133447117179583,
+      "errors": 0,
+      "timeouts_504": 0,
+      "x_cache": {},
+      "server_metrics_delta": {
+        "requests": 937250,
+        "cache_hits": 0,
+        "cache_misses": 0,
+        "cache_bypass": 937250,
+        "coalesced": 0,
+        "db_reads": 937250,
+        "redis_errors": 0,
+        "hit_rate": 0
+      },
+      "mode": "concurrent",
+      "workers": 32
+    }
+  ],
+  "batch_cached": [
+    {
+      "name": "batch_sequential_cached",
+      "concurrency": 4,
+      "duration": "10s",
+      "requests": 8689,
+      "rps": 868.9,
+      "latency": {
+        "count": 8689,
+        "mean_ms": 4.592745325814247,
+        "p50_ms": 4.446607,
+        "p90_ms": 5.490296,
+        "p95_ms": 5.864568,
+        "p99_ms": 7.101233,
+        "max_ms": 10.984794
+      },
+      "little_mean_ms": 4.603521694095983,
+      "errors": 0,
+      "timeouts_504": 0,
+      "x_cache": {},
+      "server_metrics_delta": {
+        "requests": 434271,
+        "cache_hits": 434274,
+        "cache_misses": 0,
+        "cache_bypass": 0,
+        "coalesced": 0,
+        "db_reads": 0,
+        "redis_errors": 0,
+        "hit_rate": 1
+      },
+      "mode": "sequential",
+      "workers": 1
+    },
+    {
+      "name": "batch_workers_1_cached",
+      "concurrency": 4,
+      "duration": "10s",
+      "requests": 9909,
+      "rps": 990.9,
+      "latency": {
+        "count": 9909,
+        "mean_ms": 4.028197096578868,
+        "p50_ms": 3.969069,
+        "p90_ms": 4.500599,
+        "p95_ms": 4.741336,
+        "p99_ms": 5.21736,
+        "max_ms": 10.893149
+      },
+      "little_mean_ms": 4.03673428196589,
+      "errors": 0,
+      "timeouts_504": 0,
+      "x_cache": {},
+      "server_metrics_delta": {
+        "requests": 495285,
+        "cache_hits": 495288,
+        "cache_misses": 0,
+        "cache_bypass": 0,
+        "coalesced": 0,
+        "db_reads": 0,
+        "redis_errors": 0,
+        "hit_rate": 1
+      },
+      "mode": "concurrent",
+      "workers": 1
+    },
+    {
+      "name": "batch_workers_4_cached",
+      "concurrency": 4,
+      "duration": "10s",
+      "requests": 16054,
+      "rps": 1605.4,
+      "latency": {
+        "count": 16054,
+        "mean_ms": 2.479412403700012,
+        "p50_ms": 2.422473,
+        "p90_ms": 3.132964,
+        "p95_ms": 3.360053,
+        "p99_ms": 3.804679,
+        "max_ms": 5.329918
+      },
+      "little_mean_ms": 2.491590880777376,
+      "errors": 0,
+      "timeouts_504": 0,
+      "x_cache": {},
+      "server_metrics_delta": {
+        "requests": 802500,
+        "cache_hits": 802500,
+        "cache_misses": 0,
+        "cache_bypass": 0,
+        "coalesced": 0,
+        "db_reads": 0,
+        "redis_errors": 0,
+        "hit_rate": 1
+      },
+      "mode": "concurrent",
+      "workers": 4
+    },
+    {
+      "name": "batch_workers_8_cached",
+      "concurrency": 4,
+      "duration": "10s",
+      "requests": 19603,
+      "rps": 1960.3,
+      "latency": {
+        "count": 19603,
+        "mean_ms": 2.026353489057797,
+        "p50_ms": 1.951552,
+        "p90_ms": 2.72576,
+        "p95_ms": 2.993192,
+        "p99_ms": 3.601796,
+        "max_ms": 6.955504
+      },
+      "little_mean_ms": 2.040504004489109,
+      "errors": 0,
+      "timeouts_504": 0,
+      "x_cache": {},
+      "server_metrics_delta": {
+        "requests": 980006,
+        "cache_hits": 980014,
+        "cache_misses": 0,
+        "cache_bypass": 0,
+        "coalesced": 0,
+        "db_reads": 0,
+        "redis_errors": 0,
+        "hit_rate": 1
+      },
+      "mode": "concurrent",
+      "workers": 8
+    },
+    {
+      "name": "batch_workers_16_cached",
+      "concurrency": 4,
+      "duration": "10s",
+      "requests": 22705,
+      "rps": 2270.5,
+      "latency": {
+        "count": 22705,
+        "mean_ms": 1.7477466960140937,
+        "p50_ms": 1.64987,
+        "p90_ms": 2.474215,
+        "p95_ms": 2.805044,
+        "p99_ms": 3.454035,
+        "max_ms": 5.252716
+      },
+      "little_mean_ms": 1.761726491962123,
+      "errors": 0,
+      "timeouts_504": 0,
+      "x_cache": {},
+      "server_metrics_delta": {
+        "requests": 1135050,
+        "cache_hits": 1135063,
+        "cache_misses": 0,
+        "cache_bypass": 0,
+        "coalesced": 0,
+        "db_reads": 0,
+        "redis_errors": 0,
+        "hit_rate": 1
+      },
+      "mode": "concurrent",
+      "workers": 16
+    },
+    {
+      "name": "batch_workers_32_cached",
+      "concurrency": 4,
+      "duration": "10s",
+      "requests": 24040,
+      "rps": 2404,
+      "latency": {
+        "count": 24040,
+        "mean_ms": 1.6493614259567386,
+        "p50_ms": 1.578418,
+        "p90_ms": 2.304109,
+        "p95_ms": 2.621321,
+        "p99_ms": 3.333982,
+        "max_ms": 5.140687
+      },
+      "little_mean_ms": 1.663893510815308,
+      "errors": 0,
+      "timeouts_504": 0,
+      "x_cache": {},
+      "server_metrics_delta": {
+        "requests": 1201813,
+        "cache_hits": 1201860,
+        "cache_misses": 0,
+        "cache_bypass": 0,
+        "coalesced": 0,
+        "db_reads": 0,
+        "redis_errors": 0,
+        "hit_rate": 1
+      },
+      "mode": "concurrent",
+      "workers": 32
+    }
+  ],
+  "ramp": [
+    {
+      "name": "ramp_cache",
+      "concurrency": 50,
+      "duration": "10s",
+      "requests": 625597,
+      "rps": 62559.7,
+      "latency": {
+        "count": 625597,
+        "mean_ms": 0.7963097524556543,
+        "p50_ms": 0.692681,
+        "p90_ms": 1.382323,
+        "p95_ms": 1.70455,
+        "p99_ms": 2.470954,
+        "max_ms": 7.883827
+      },
+      "little_mean_ms": 0.7992365692290725,
+      "errors": 0,
+      "timeouts_504": 0,
+      "x_cache": {
+        "HIT": 625597
+      },
+      "server_metrics_delta": {
+        "requests": 625563,
+        "cache_hits": 625590,
+        "cache_misses": 0,
+        "cache_bypass": 0,
+        "coalesced": 0,
+        "db_reads": 0,
+        "redis_errors": 0,
+        "hit_rate": 1
+      }
+    },
+    {
+      "name": "ramp_cache",
+      "concurrency": 200,
+      "duration": "10s",
+      "requests": 1010053,
+      "rps": 101005.3,
+      "latency": {
+        "count": 1010053,
+        "mean_ms": 1.9768709231990798,
+        "p50_ms": 1.703863,
+        "p90_ms": 3.466352,
+        "p95_ms": 4.396959,
+        "p99_ms": 6.209992,
+        "max_ms": 18.737755
+      },
+      "little_mean_ms": 1.9800941138732324,
+      "errors": 0,
+      "timeouts_504": 0,
+      "x_cache": {
+        "HIT": 1010053
+      },
+      "server_metrics_delta": {
+        "requests": 1009946,
+        "cache_hits": 1010097,
+        "cache_misses": 0,
+        "cache_bypass": 0,
+        "coalesced": 0,
+        "db_reads": 0,
+        "redis_errors": 0,
+        "hit_rate": 1
+      }
+    },
+    {
+      "name": "ramp_cache",
+      "concurrency": 500,
+      "duration": "10s",
+      "requests": 1103743,
+      "rps": 110374.3,
+      "latency": {
+        "count": 1103743,
+        "mean_ms": 4.526812027013535,
+        "p50_ms": 4.201619,
+        "p90_ms": 6.557076,
+        "p95_ms": 7.604051,
+        "p99_ms": 10.281951,
+        "max_ms": 25.849333
+      },
+      "little_mean_ms": 4.530040054614163,
+      "errors": 0,
+      "timeouts_504": 0,
+      "x_cache": {
+        "HIT": 1103743
+      },
+      "server_metrics_delta": {
+        "requests": 1103732,
+        "cache_hits": 1103924,
+        "cache_misses": 0,
+        "cache_bypass": 0,
+        "coalesced": 0,
+        "db_reads": 0,
+        "redis_errors": 0,
+        "hit_rate": 1
+      }
+    },
+    {
+      "name": "ramp_mysql_only",
+      "concurrency": 50,
+      "duration": "10s",
+      "requests": 650519,
+      "rps": 65051.9,
+      "latency": {
+        "count": 650519,
+        "mean_ms": 0.7662014680401341,
+        "p50_ms": 0.679025,
+        "p90_ms": 1.269985,
+        "p95_ms": 1.536168,
+        "p99_ms": 2.300375,
+        "max_ms": 6.893607
+      },
+      "little_mean_ms": 0.7686170580720932,
+      "errors": 0,
+      "timeouts_504": 0,
+      "x_cache": {
+        "BYPASS": 650519
+      },
+      "server_metrics_delta": {
+        "requests": 650514,
+        "cache_hits": 0,
+        "cache_misses": 0,
+        "cache_bypass": 650514,
+        "coalesced": 0,
+        "db_reads": 650514,
+        "redis_errors": 0,
+        "hit_rate": 0
+      }
+    },
+    {
+      "name": "ramp_mysql_only",
+      "concurrency": 200,
+      "duration": "10s",
+      "requests": 915979,
+      "rps": 91597.9,
+      "latency": {
+        "count": 915979,
+        "mean_ms": 2.180086911811297,
+        "p50_ms": 1.792319,
+        "p90_ms": 4.282949,
+        "p95_ms": 5.269114,
+        "p99_ms": 7.283208,
+        "max_ms": 20.561935
+      },
+      "little_mean_ms": 2.183456170938417,
+      "errors": 0,
+      "timeouts_504": 0,
+      "x_cache": {
+        "BYPASS": 915979
+      },
+      "server_metrics_delta": {
+        "requests": 915870,
+        "cache_hits": 0,
+        "cache_misses": 0,
+        "cache_bypass": 915870,
+        "coalesced": 0,
+        "db_reads": 915870,
+        "redis_errors": 0,
+        "hit_rate": 0
+      }
+    },
+    {
+      "name": "ramp_mysql_only",
+      "concurrency": 500,
+      "duration": "10s",
+      "requests": 928335,
+      "rps": 92833.5,
+      "latency": {
+        "count": 928335,
+        "mean_ms": 5.380361681019244,
+        "p50_ms": 4.438531,
+        "p90_ms": 10.758377,
+        "p95_ms": 13.139562,
+        "p99_ms": 18.380889,
+        "max_ms": 52.499048
+      },
+      "little_mean_ms": 5.3859867397006465,
+      "errors": 0,
+      "timeouts_504": 0,
+      "x_cache": {
+        "BYPASS": 928335
+      },
+      "server_metrics_delta": {
+        "requests": 928271,
+        "cache_hits": 0,
+        "cache_misses": 0,
+        "cache_bypass": 928271,
+        "coalesced": 0,
+        "db_reads": 928271,
+        "redis_errors": 0,
+        "hit_rate": 0
+      }
+    }
+  ],
+  "stampede": {
+    "name": "stampede_coalescing",
+    "concurrency": 200,
+    "duration": "10s",
+    "requests": 1114785,
+    "rps": 111478.5,
+    "latency": {
+      "count": 1114785,
+      "mean_ms": 1.7918615337845416,
+      "p50_ms": 1.523087,
+      "p90_ms": 3.201333,
+      "p95_ms": 4.118146,
+      "p99_ms": 5.810522,
+      "max_ms": 13.598363
+    },
+    "little_mean_ms": 1.794067914440901,
+    "errors": 0,
+    "timeouts_504": 0,
+    "x_cache": {
+      "HIT": 1102138,
+      "MISS": 12647
+    },
+    "server_metrics_delta": {
+      "requests": 1114702,
+      "cache_hits": 1102173,
+      "cache_misses": 12647,
+      "cache_bypass": 0,
+      "coalesced": 12443,
+      "db_reads": 204,
+      "redis_errors": 0,
+      "hit_rate": 0.9886555677149674
+    }
+  }
+}
